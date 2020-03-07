@@ -10,7 +10,7 @@ function Card(props) {
         };
         const deleteItem = index => {
             setTitle(
-                title.filter((item, Card) => Card !== index)
+                title.filter((item, currentIndex) => currentIndex !== index)
             );
         };
         props.setState([
@@ -32,9 +32,7 @@ function Card(props) {
                     className="input-clear"
                 />
                 <button onClick={handleTitle}>Add</button>
-                <button className="btn col s2" onClick={() => Card(index)}>
-                    Delete
-            </button>
+
             </div>
 
         </div>
