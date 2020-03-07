@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 function Card(props) {
-    const [title, setTitle] = React.useState(props.state.title)
+
+    const [title, setTitle] = useState(props.state.title)
+
     const handleTitle = () => {
         const newState = [...props.state];
         const newCard = {
@@ -14,6 +16,22 @@ function Card(props) {
             newCard
         ]);
     };
+
+    const setTitle = (index, title) => {
+        const newCards = [...cards];
+        newCards[index] = {
+            ...newCards[index],
+            title: title
+        };
+        setState(newCards);
+    };
+    const deleteFromList = indexToDelete => {
+        setTitle(
+            [...title].filter((item, index) => index !== indexToDelete)
+        );
+    };
+
+
     console.log(props.state)
 
     return (
@@ -24,10 +42,19 @@ function Card(props) {
                     placeholder="Title"
                     aria-label="Title"
                     value={title}
-                    onChange={e => setTitle(e.target.value)}
+
+                    onChange={e => handleTitle(e.target.value)}
                     className="input-clear"
                 />
                 <button onClick={handleTitle}>Add</button>
+                <button
+                    aria-label="Delete"
+                    title="Delete"
+                    className="btn"
+                    onClick={e => deleteFromList(e.target.value)}
+                >
+                    Delete
+                </button>
 
             </div>
 

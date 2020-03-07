@@ -22,16 +22,23 @@ function App() {
 
     }
   ]);
-
+  const setTitle = (index, title) => {
+    const newCards = [...cards];
+    newCards[index] = {
+      ...newCards[index],
+      title: title
+    };
+    setCards(newCards);
+  };
 
   return (
     <>
       <Board cards={cards} setCards={setCards}>
-        {cards.map((cards, index) => {
+        {cards.map((card, index) => {
           return (
 
             <Card
-
+              setTitle={title => setTitle(index, title)}
               cards={cards}
               setCards={setCards}
               key={`card-${index}`}
