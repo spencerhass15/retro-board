@@ -8,11 +8,7 @@ function Card(props) {
         const newCard = {
             title: title
         };
-        const deleteItem = index => {
-            setTitle(
-                title.filter((item, currentIndex) => currentIndex !== index)
-            );
-        };
+
         props.setState([
             ...newState,
             newCard
