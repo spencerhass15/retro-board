@@ -8,48 +8,18 @@ import Board from "../src/components/Board";
 
 
 function App() {
-  const [cards, setCards] = useState([
-    {
-      title: "",
-
-    },
-    {
-      title: "",
-
-    },
-    {
-      title: "",
-
-    }
-  ]);
-  const setTitle = (index, title) => {
-    const newCards = [...cards];
-    newCards[index] = {
-      ...newCards[index],
-      title: title
-    };
-    setCards(newCards);
-  };
-
+  const [state, setState] = useState([])
   return (
-    <>
-      <Board cards={cards} setCards={setCards}>
-        {cards.map((card, index) => {
-          return (
+    <div className="container">
+      <div className="row text-center">
+        <Board className="col-md-3 text-center p-5" title="Went Well" board="wentWell" state={state} setState={setState} />
+        <Board className="col-md-3 text-center p-5" title="To Improve" board="toImprove" state={state} setState={setState} />
+        <Board className="col-md-3 text-center p-5" title="Action Item" board="actionItem" state={state} setState={setState} />
 
-            <Card
-              setTitle={title => setTitle(index, title)}
-              cards={cards}
-              setCards={setCards}
-              key={`card-${index}`}
-              className="mb-2"
-            />
+      </div>
+    </div>
+  )
 
-          );
-        })}
-      </Board>
-    </>
-  );
 }
 
 

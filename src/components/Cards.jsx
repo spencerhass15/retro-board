@@ -29,7 +29,7 @@ function Cards() {
           return <Card card={card} onRemove={() => remove(index)} />;
         })}
       </div>
-      <div className="-movie">
+      <div className="-card">
         <input
           type="text"
           value={newCard}
@@ -37,11 +37,8 @@ function Cards() {
         />
         <button onClick={handleAddClick}>Add new</button>
         <div>
-          <h1>{count}</h1>
-          <h1>{down}</h1>
-
-          <button onClick={() => setCount(count + 1)}>Thumbs Up</button>
-          <button onClick={() => setDown(down + 1)}>Thumbs Down</button>
+          <i class="fas fa-thumbs-up" onClick={() => setCount(down + 1)}>{count}</i>
+          <i class="fas fa-thumbs-down" onClick={() => setDown(down + 1)}>{down}</i>
         </div>
       </div>
     </>
