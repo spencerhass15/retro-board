@@ -18,7 +18,7 @@ function Board(props) {
         ])
     }
     return (
-        <div>
+        <div className="col-md-3">
             <h2>{props.title}</h2>
             <button onClick={createNew}>New</button>
             <div>

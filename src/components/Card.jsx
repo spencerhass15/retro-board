@@ -1,67 +1,46 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
-
-function Card(props) {
-
-    const [title, setTitle] = useState(props.state.title)
-
-    const handleTitle = () => {
-        const newState = [...props.state];
-        const newCard = {
-            title: title
-        };
-
-        props.setState([
-            ...newState,
-            newCard
-        ]);
-    };
-
-    const setTitle = (index, title) => {
-        const newCards = [...cards];
-        newCards[index] = {
-            ...newCards[index],
-            title: title
-        };
-        setState(newCards);
-    };
-    const deleteFromList = indexToDelete => {
-        setTitle(
-            [...title].filter((item, index) => index !== indexToDelete)
-        );
-    };
-
-
-    console.log(props.state)
-
+function Card() {
+    const [cards, addCard] = useState([]);
+    const [card, setCard] = useState("");
+    const [count, setCount] = useState(0);
+    const [down, setDown] = useState(0);
     return (
-        <div className={`${props.className || ""} card card-body bg-warning`}>
+        <div>
+            {card ? <div>You are going to add {card}</div> : <div />}
+            <br />
+            <input type="text" onChange={e => setCard(e.target.value)} value={card} />
+            <button
+                onClick={() => {
+                    let arr = [...cards, card];
+                    addCard(arr);
+                    setCard("");
+                }}
+            >
+                Add text
+      </button>
             <div>
-                <input
-                    type="text"
-                    placeholder="Title"
-                    aria-label="Title"
-                    value={title}
+                <div>
+                    {cards.map((crd, index) => (
+                        <div key={index}>{crd} <button onClick={() => {
+                            let arr = cards.filter((i, idx) => index !== idx);
+                            addCard(arr);
+                        }}>delete</button>
+                            <div class="pt-3">
 
-                    onChange={e => handleTitle(e.target.value)}
-                    className="input-clear"
-                />
-                <button onClick={handleTitle}>Add</button>
-                <button
-                    aria-label="Delete"
-                    title="Delete"
-                    className="btn"
-                    onClick={e => deleteFromList(e.target.value)}
-                >
-                    Delete
-                </button>
+                                <i class="fas fa-thumbs-up fa-2x" onClick={() => setCount(count + 1)}></i>{count}
+                                <i class="fas fa-thumbs-down fa-2x" onClick={() => setDown(down + 1)}></i>{down}
+
+                            </div>
+                        </div>
+                    ))}
+
+                </div>
+
+
+
 
             </div>
-
         </div>
     );
 }
-
-
-
 export default Card;
