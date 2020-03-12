@@ -1,126 +1,46 @@
 import React, { useState } from "react";
-
-
-function Cards() {
-  const [count, setCount] = useState(0);
-  const [down, setDown] = useState(0);
-  const [cards, setCards] = useState([{ name: "" }]);
-  const [newCard, setNewCard] = useState("");
-
-
-  const add = card => setCards([...cards, card]);
-
-  const remove = index => {
-    setCards([...cards.slice(0, index), ...cards.slice(index + 1)]);
-  };
-
-  const handleAddClick = () => {
-    if (newCard === "") {
-      return;
-    }
-    add({ name: newCard });
-    setNewCard("");
-  };
-
-  return (
-    <>
-      <div className="">
-        {cards.map((card, index) => {
-          return <Card card={card} onRemove={() => remove(index)} />;
-        })}
-      </div>
-      <div className="-movie">
-        <input
-          type="text"
-          value={newCard}
-          onChange={event => setNewCard(event.target.value)}
-        />
-        <button onClick={handleAddClick}>Add new</button>
+function Card() {
+    const [cards, addCard] = useState([]);
+    const [card, setCard] = useState("");
+    const [count, setCount] = useState(0);
+    const [down, setDown] = useState(0);
+    return (
         <div>
-      <h1>{count}</h1>
-      <h1>{down}</h1>
+            {card ? <div>You are going to add {card}</div> : <div />}
+            <br />
+            <input type="text" onChange={e => setCard(e.target.value)} value={card} />
+            <button
+                onClick={() => {
+                    let arr = [...cards, card];
+                    addCard(arr);
+                    setCard("");
+                }}
+            >
+                Add text
+      </button>
+            <div>
+                <div>
+                    {cards.map((crd, index) => (
+                        <div key={index}>{crd} <button onClick={() => {
+                            let arr = cards.filter((i, idx) => index !== idx);
+                            addCard(arr);
+                        }}>delete</button>
+                            <div class="pt-3">
 
-      <button onClick={() => setCount(count + 1)}>Thumbs Up</button>
-      <button onClick={() => setDown(down + 1)}>Thumbs Down</button>
-    </div>
-      </div>
-    </>
-  );
+                                <i class="fas fa-thumbs-up fa-2x" onClick={() => setCount(count + 1)}></i>{count}
+                                <i class="fas fa-thumbs-down fa-2x" onClick={() => setDown(down + 1)}></i>{down}
+
+                            </div>
+                        </div>
+                    ))}
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+    );
 }
-
-function Card({ card, onRemove }) {
-  return (
-    <div className="">
-      <span>{card.name}</span>
-      <button onClick={onRemove}>Remove</button>
-
-    </div>
-  );
-}
-
-
-//     const [title, setTitle] = useState(props.state.title)
-
-//     const handleTitle = () => {
-//         const newState = [...props.state];
-//         const newCard = {
-//             title: title
-//         };
-
-//         props.setState([
-//             ...newState,
-//             newCard
-//         ]);
-//     };
-
-//     // const setTitle = (index, title) => {
-//     //     const newCards = [...cards];
-//     //     newCards[index] = {
-//     //         ...newCards[index],
-//     //         title: title
-//     //     };
-//     //     setState(newCards);
-//     // };
-//     // const deleteFromList = indexToDelete => {
-//     //     setTitle(
-//     //         [...title].filter((item, index) => index !== indexToDelete)
-//     //     );
-//     // };
-  
-
-//     console.log(props.state)
-
-//     return (
-//         <div className={`${props.className || ""} card card-body bg-warning`}>
-//             <div>
-//                 <input
-//                     type="text"
-//                     placeholder="Title"
-//                     aria-label="Title"
-//                     value={title}
-
-//                     onChange={e => handleTitle(e.target.value)}
-//                     className="input-clear"
-//                 />
-//                 <button onClick={handleTitle}>Add</button>
-//                 <button
-//                     aria-label="Delete"
-//                     title="Delete"
-//                     className="btn"
-                    
-//                 >
-//                     Delete
-//                 </button>
-//                 <h1>{count}</h1>
-//       <h1>{down}</h1>
-//       <button onClick={() => setCount(count + 1)}>Like</button>
-//       <button onClick={() => setDown(down + 1)}>Dislike</button>
-//             </div>
-
-//         </div>
-//     );
-// }
-
-
-
-export default Cards;
+export default Card;
