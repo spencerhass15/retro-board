@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "./Cards"
+import Cards from "./Cards"
 
 function Board(props) {
     const createNew = () => {
@@ -18,14 +18,15 @@ function Board(props) {
         ])
     }
     return (
-        <div className="col-md-3">
+        <div className="col-md-4">
             <h2>{props.title}</h2>
-            <button onClick={createNew}>New</button>
+            <button onClick={createNew}>+</button>
+            {console.log(props.state)}
             <div>
                 {props.state.map((card, index) => {
                     if (card.board === props.board) {
-                        return (
-                            <Card
+                        return (card.board === props.board &&
+                            <Cards
                                 key={index}
                                 state={props.state}
                                 setState={props.setState}
