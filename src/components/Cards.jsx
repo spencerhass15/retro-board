@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 
-
 function Cards() {
-
   const [cards, setCards] = useState([{ name: "" }]);
   // const [newCard, setNewCard] = useState("");
-
 
   // const add = card => setCards([...cards, card]);
 
@@ -24,7 +21,6 @@ function Cards() {
 
   return (
     <>
-
       <div className="-card pt-3">
         {/* <textarea
           type="text"
@@ -37,11 +33,16 @@ function Cards() {
           <i className="fas fa-thumbs-down fa-2x pl-3" onClick={() => setDown(down + 1)}>{down}</i> */}
           <div className="">
             {cards.map((card, index) => {
-              return <Card card={card} color={'#dcdcdc'} onRemove={() => remove(index)} />;
+              return (
+                <Card
+                  card={card}
+                  color={"#dcdcdc"}
+                  onRemove={() => remove(index)}
+                />
+              );
             })}
           </div>
         </div>
-
       </div>
     </>
   );
@@ -54,12 +55,34 @@ function Card({ card, onRemove, color }) {
     <div className="p-5" style={{ backgroundColor: color }}>
       <span>{card.name}</span>
       <textarea />
-      <div className="d-flex justify-content-between p-2"><i className="fas fa-thumbs-up fa-2x" onClick={() => setUp(up + 1)}>{up}</i>
-        <i className="fas fa-trash-alt fa-2x" onClick={onRemove}></i>
-        <i className="fas fa-thumbs-down fa-2x pl-3" onClick={() => setDown(down + 1)}>{down}</i>
+      <div className="d-flex justify-content-between p-2">
+        <button
+          onClick={() => {
+
+          }}
+        >
+          {" "}
+          <i className="fas fa-caret-left left" title="" />
+        </button>
+        <i className="fas fa-thumbs-up fa-2x" onClick={() => setUp(up + 1)}>
+          {up}
+        </i>
+        <i className="fas fa-trash-alt fa-2x" onClick={onRemove} />
+        <i
+          className="fas fa-thumbs-down fa-2x pl-3"
+          onClick={() => setDown(down + 1)}
+        >
+          {down}
+        </i>
+        <button
+          onClick={() => {
+
+          }}
+        >
+          {" "}
+          <i className="fas fa-caret-right right" title="" />
+        </button>
       </div>
-
-
     </div>
   );
 }
