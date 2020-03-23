@@ -1,8 +1,10 @@
-import React from "react";
-import Cards from "./Cards"
+import React, { useState } from 'react';
+import Card from "./Cards"
 
 function Board(props) {
+    //const [state, setState] = useState([])
     const createNew = () => {
+        // console.log(props.board);
         let id = 0;
         if (props.state.length > 0) {
             id = props.state[props.state.length - 1].id + 1;
@@ -21,21 +23,27 @@ function Board(props) {
         <div className="col-md-4">
             <h2>{props.title}</h2>
             <button onClick={createNew}>+</button>
-            {console.log(props.state)}
+
             <div>
+
                 {props.state.map((card, index) => {
+                    console.log(card);
                     if (card.board === props.board) {
-                        return (card.board === props.board &&
-                            <Cards
-                                key={index}
+                        return (
+
+                            <Card
+                                card={card}
+                                color={'#dcdcdc'}
+                                board={props.board}
                                 state={props.state}
                                 setState={props.setState}
-                                board={props.board}
-                                index={index}
+
                             />
-                        )
+
+                        );
                     }
                 })}
+
             </div>
         </div>
 
