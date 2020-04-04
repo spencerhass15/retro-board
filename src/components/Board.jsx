@@ -27,7 +27,6 @@ function Board(props) {
             <div>
 
                 {props.state.map((card, index) => {
-                    console.log(card);
                     if (card.board === props.board) {
                         return (
 

@@ -2,42 +2,50 @@ import React, { useState } from "react";
 
 
 function Card(props) {
+  const [title, setTitle] = useState(props.card.title);
 
   const boards = ["wentWell", "toImprove", "actionItem"];
   const sendLeft = (idx) => {
-
     const stateCopy = [...props.state]
+    stateCopy.forEach(card => {
+      if (card.id === props.card.id) {
+        const index = boards.indexOf(props.board) - 1 < 0 ? 2 : boards.indexOf(props.board) - 1
+        card.board = boards[index]
 
-    let board = ""
-    if (stateCopy[idx].board === boards[0]) {
-      board = boards[2]
-    }
-    else {
-      board = boards[boards.indexOf(stateCopy[idx].board) - 1]
-    }
-
-    stateCopy[idx].board = board
-
+      }
+    })
 
     props.setState(stateCopy)
   }
   const remove = index => {
-
     props.setState(props.state.filter(card => card.id !== index))
+
+    setTitle(props.state.forEach(card => {
+      if (card.id === props.card.id) {
+        return card.title
+      }
+    }))
+
   };
+
+  React.useEffect(() => {
+    setTitle(props.card.title);
+  }, [props.card])
+  // const [index, setIndex] = useState()
+  // React.useEffect(()=>{
+  //   props.setState(props.state.filter(card => card.id !== index))
+  // },[index])
+
+
+
   const sendRight = (idx) => {
-
     const stateCopy = [...props.state]
-
-    let board = ""
-    if (stateCopy[idx].board === boards[2]) {
-      board = boards[0]
-    }
-    else {
-      board = boards[boards.indexOf(stateCopy[idx].board) + 1]
-    }
-
-    stateCopy[idx].board = board
+    stateCopy.forEach(card => {
+      if (card.id === props.card.id) {
+        const index = boards.indexOf(props.board) + 1 > 2 ? 0 : boards.indexOf(props.board) + 1
+        card.board = boards[index]
+      }
+    })
 
 
     props.setState(stateCopy)
@@ -46,6 +54,19 @@ function Card(props) {
 
   const [up, setUp] = useState(0);
   const [down, setDown] = useState(0);
+
+  const handleTitle = () => {
+
+    const stateCopy = [...props.state]
+    stateCopy.forEach(card => {
+      if (card.id === props.card.id) {
+        card.title = title
+      }
+    })
+
+    props.setState(stateCopy);
+
+  }
 
   return (
 
@@ -58,7 +79,9 @@ function Card(props) {
 
             <div className="p-5" style={{ backgroundColor: props.color }}>
               <span>{props.card.name}</span>
-              <textarea />
+
+              <input value={title} placeholder={props.card.id} onChange={e => setTitle(e.target.value)} />
+              <button onClick={handleTitle}>save</button>
               <div className="d-flex justify-content-between p-2">
                 <button
                   onClick={() => sendLeft(props.card.id)}
@@ -69,7 +92,10 @@ function Card(props) {
                 <i className="fas fa-thumbs-up fa-2x" onClick={() => setUp(up + 1)}>
                   {up}
                 </i>
+
                 <i className="fas fa-trash-alt fa-2x" onClick={() => remove(props.card.id)} />
+
+
                 <i
                   className="fas fa-thumbs-down fa-2x pl-3"
                   onClick={() => setDown(down + 1)}
@@ -91,7 +117,7 @@ function Card(props) {
     </>
 
   );
-  //   }
+
 }
 
 export default Card;
