@@ -31,10 +31,6 @@ function Card(props) {
   React.useEffect(() => {
     setTitle(props.card.title);
   }, [props.card])
-  // const [index, setIndex] = useState()
-  // React.useEffect(()=>{
-  //   props.setState(props.state.filter(card => card.id !== index))
-  // },[index])
 
 
 
